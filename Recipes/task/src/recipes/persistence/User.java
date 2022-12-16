@@ -1,4 +1,4 @@
-package recipes;
+package recipes.persistence;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -6,9 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
+import recipes.persistence.Recipe;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.util.*;

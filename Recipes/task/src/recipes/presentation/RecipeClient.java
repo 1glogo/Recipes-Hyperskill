@@ -1,11 +1,10 @@
-package recipes;
+package recipes.presentation;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import recipes.persistence.Recipe;
 
-import javax.persistence.Column;
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Data

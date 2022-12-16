@@ -1,8 +1,9 @@
-package recipes;
+package recipes.business;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import recipes.persistence.User;
 
 import java.util.ArrayList;
 import java.util.Collection;

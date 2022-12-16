@@ -1,4 +1,4 @@
-package recipes;
+package recipes.presentation;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package recipes;
+package recipes.presentation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -6,6 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import recipes.persistence.IRecipeRepository;
+import recipes.persistence.IUserRepository;
+import recipes.persistence.Recipe;
+import recipes.persistence.User;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
