@@ -1,9 +1,8 @@
-package recipes.persistence;
+package recipes.business;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -42,26 +41,15 @@ public class Recipe {
     @Column
     private LocalDateTime date;
 
+    //Various recipes can belong to one user
     @ManyToOne
+    //Only one user per recipe can be provided
     @JoinColumn (name = "user_id", referencedColumnName = "id")
     private User user;
 
-
-
-    public Recipe(Recipe newRecipe) {
-        this.id = newRecipe.getId();
-        this.name = newRecipe.getName();
-        this.description= newRecipe.getDescription();
-        this.ingredients = newRecipe.getIngredients();
-        this.directions= newRecipe.getDirections();
-        this.category=newRecipe.getCategory();
-        this.date = LocalDateTime.now();
-    }
     public Recipe () {
         this.date = LocalDateTime.now();
     }
-
-
     @Override
     public String toString() {
         return "Recipe{" +

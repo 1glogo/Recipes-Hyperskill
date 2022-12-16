@@ -2,7 +2,6 @@ package recipes.business;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,12 +14,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
+    public WebSecurity(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        System.out.println("authentication started");
         auth
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(getEncoder());
@@ -28,11 +28,14 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        System.out.println("HTTP SECURITY started");
         http.authorizeRequests()
+                //provided for testing purposes only
                 .mvcMatchers(HttpMethod.POST, "/actuator/**").permitAll()
+                //anyone can access the database log in page
                 .mvcMatchers("/h2/**").permitAll()
+                //anyone can register
                 .mvcMatchers("/api/register").permitAll()
+                //to add or edit a recipe you need authentication
                 .mvcMatchers("/api/recipe/**").authenticated()
                 .and()
                 .httpBasic()
@@ -41,9 +44,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable();
     }
 
+    //Password encoder to be used in our database
     @Bean
     PasswordEncoder getEncoder(){
         return new BCryptPasswordEncoder(10);
-
     }
 }
